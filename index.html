@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+    
+    #output {
+        font-size: 3rem;
+        font-weight: 700;
+        font-family: sans-serif;
+    }
+
+    #stop-btn{
+        background-color: red;
+    }
+
+    .btn-str, .btn-stp{
+    height: 3rem;
+    width: 6rem;
+    font-size: x-large;
+    margin-top: 2px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+    }
+</style>
+<title>Voice to Text Generator</title>
+</head>
+<body>
+    <h1>Speech to text Converter</h1>
+    <textarea id="output" rows="10" cols="100"></textarea><br>
+    <button class="btn-str" id="start-btn">Start</button>
+    <button class="btn-stp" id="stop-btn">Stop</button>
+    
+<script>
+const recognition =  new webkitSpeechRecognition();
+recognition.lang = 'en-US';
+recognition.interimResults = true;
+recognition.continuous = true;
+
+document.getElementById("start-btn")
+.onclick = () => recognition.start();
+
+
+document.getElementById("stop-btn")
+.onclick = () => recognition.stop();
+
+recognition.onresult = event => {
+output.value = event.results[event.results.length - 1][0].transcript;
+navigator.mediaDevices.getUserMedia({ audio: true });
+}
+</script>
+</body>
+</html>
